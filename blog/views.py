@@ -12,6 +12,7 @@ class PostList(ListView) :
 
 class PostDetail(DeleteView) :
     model = Post
+    template_name = 'blog/post_detail.html'
 
 '''
 # Function Based View

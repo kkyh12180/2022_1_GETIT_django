@@ -8,7 +8,7 @@ from .models import Post
 
 class PostList(ListView) :
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog/post_list.html'
 
 class PostDetail(DeleteView) :
     model = Post

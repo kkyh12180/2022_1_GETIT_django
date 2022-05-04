@@ -1,8 +1,19 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DeleteView
 from .models import Post
 
 # Create your views here.
 
+# Class Based View
+
+class PostList(ListView) :
+    model = Post
+    template_name = 'blog/index.html'
+
+class PostDetail(DeleteView) :
+    model = Post
+
+'''
 # Function Based View
 
 def index(request) : 
@@ -27,3 +38,4 @@ def single_post_page(request, pk) :
             'post': post, 
         }
     )
+'''

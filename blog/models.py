@@ -6,6 +6,7 @@ class Post(models.Model) :
     title = models.CharField(max_length = 30)
     content = models.TextField()
 
+
     # Save Image
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d', blank=True)
     file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d', blank=True)
@@ -17,3 +18,6 @@ class Post(models.Model) :
     # pk : 기본키
     def __str__(self) :
         return f'[{self.pk}] {self.title}'
+
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}/'

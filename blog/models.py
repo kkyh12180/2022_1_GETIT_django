@@ -18,7 +18,7 @@ class Post(models.Model) :
     updated_at = models.DateTimeField(auto_now = True)
 
     # Author
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     # pk : 기본키
     def __str__(self) :

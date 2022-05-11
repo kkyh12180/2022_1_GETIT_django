@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     #path('', views.index), 
+    path('category/<str:slug>/', views.category_page),
     path('', views.PostList.as_view()), 
     # if integer -> call single_postpage
     path('<int:pk>/', views.PostDetail.as_view()),

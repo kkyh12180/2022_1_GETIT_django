@@ -4,9 +4,22 @@ from django.contrib.auth.models import User
 import os
 
 # Create your models here.
+class Category(models.Model) : 
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self) :
+        return self.name
+
+    def get_absolute_url(self) :
+        return f'/blog/category/{self.slug}/'
+
+    class Meta : 
+        verbose_name_plural='Categories'
+
 class Post(models.Model) : 
-    title = models.CharField(max_length = 30)
-    hook_text = models.CharField(max_length = 100, blank=True)
+    title = models.CharField(max_length=30)
+    hook_text = models.CharField(max_length=100, blank=True)
     content = models.TextField()
 
     # Save Image
@@ -14,11 +27,14 @@ class Post(models.Model) :
     file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d', blank=True)
 
     # 표준시 기준 -> 서울 기준 필요, 이는 settings.py를 통한 조정
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # Author
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    # Category
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
 
     # pk : 기본키
     def __str__(self) :
@@ -32,3 +48,4 @@ class Post(models.Model) :
 
     def get_file_ext(self) : 
         return self.get_file_name().split('.')[-1]
+

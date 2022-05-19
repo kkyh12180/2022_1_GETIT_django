@@ -10,4 +10,5 @@ urlpatterns = [
     path('', views.PostList.as_view()), 
     # if integer -> call single_postpage
     path('<int:pk>/', views.PostDetail.as_view()),
+    path('<int:pk>/new_comment/', views.new_comment),
 ]   

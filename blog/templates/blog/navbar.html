@@ -34,7 +34,12 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ user.username }}
+                            {% if user.socialaccount_set.all.0.get_avatar_url %}
+                                <img class="rounded-circle" width="25px" src={{ user.socialaccount_set.all.0.get_avatar_url }} alt="">
+                            {% else %}
+                                <img class="rounded-circle" width="25px" src="https://doitdjango.com/avatar/id/998/dcdf2d00bddb8c6a/svg/{{ user.email }}">
+                            {% endif %}                            
+                            &nbsp;{{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/accounts/logout">Log Out</a>
@@ -56,7 +61,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel"> <i class="fas fa-sign-in-alt"></i>&nbsp Log In</h5>
+                    <h5 class="modal-title" id="loginModalLabel"> <i class="fas fa-sign-in-alt"></i>&nbsp; Log In</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -65,13 +70,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="{% provider_login_url 'google' %}">
-                                <i class="fab fa-google"></i>&nbsp&nbsp Log in with Google</a>
+                                <i class="fab fa-google"></i>&nbsp;&nbsp; Log in with Google</a>
                             <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="/accoutns/login/">
-                                <i class="fab fa-envelope"></i>&nbsp&nbsp Log in with Username</a>
+                                <i class="fab fa-envelope"></i>&nbsp;&nbsp; Log in with Username</a>
                         </div>
                         <div class="col-md-6">
                             <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="/accoutns/signup/">
-                                <i class="fab fa-envelope"></i>&nbsp&nbsp Log in with E-mail</a>
+                                <i class="fab fa-envelope"></i>&nbsp;&nbsp; Log in with E-mail</a>
                         </div>
                     </div>
                 </div>
